@@ -1,5 +1,7 @@
 package com.udemy.projeto.course.entities;
 
+import com.udemy.projeto.course.entities.enums.OrderStatus;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
