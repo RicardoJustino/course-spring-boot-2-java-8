@@ -1,5 +1,6 @@
 package com.udemy.projeto.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.udemy.projeto.course.entities.enums.OrderStatus;
 
 import javax.persistence.*;
@@ -74,7 +75,7 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    @JsonIgnore
     public List<Order> getOrder() {
         return orders;
     }
