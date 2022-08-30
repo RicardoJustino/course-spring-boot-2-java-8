@@ -2,11 +2,13 @@ package com.udemy.projeto.course.resources;
 
 import com.udemy.projeto.course.entities.User;
 import com.udemy.projeto.course.services.UserService;
+import com.udemy.projeto.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -47,8 +49,13 @@ public class UserResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj){
-        obj = userService.update(id,obj);
-        return ResponseEntity.ok().body(obj);
+        try {
+            obj = userService.update(id,obj);
+            return ResponseEntity.ok().body(obj);
+        }catch(EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
+
     }
 
 
